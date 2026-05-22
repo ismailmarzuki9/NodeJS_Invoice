@@ -1,0 +1,38 @@
+{
+  "name": "invoce_n",
+  "version": "1.0.0",
+  "description": "package",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "tesRun": "npx nodemon app",
+    "start": "electron .",
+    "build": "electron-builder",
+    "dev": "concurrently \"node app.js\" \"electron .\""
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "mysql2": "^3.18.2",
+    "nodemon": "^3.1.14",
+    "pg": "^8.19.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "electron": "^41.1.1",
+    "electron-builder": "^26.8.1",
+    "wait-on": "^9.0.4"
+  },
+  "keywords": [],
+  "build": {
+  "appId": "com.invoce.app",
+  "productName": "InvoiceApp",
+  "win": {
+            "target": "nsis"
+          }
+  }
+}

@@ -1,0 +1,137 @@
+<div class="container mt-3">
+    <div  id="invoiceArea" class="border shadow p-4 bg-body-tertiary rounded">
+
+        <!-- Logo -->
+        <div class="text-center mb-3">
+            <img src="/img/logo2.png" class="img-fluid" style="max-width:220px;">
+        </div>
+
+        <!-- Title -->
+        <div class="text-center border border-3 border-dark mb-3">
+            <h2 class="fw-bold m-2">FAKTUR / INVOICE</h2>
+        </div>
+
+        <!-- Header Section -->
+        <form method="POST" action="/invoice/:no/edit" id="invoiceForm">
+            <div class="row border border-3 p-3 mb-3">
+
+                <div class="col-md-7 border p-3">
+                    <ul class="list-unstyled mb-0 text-center">
+                        <li><strong><input type="text" name ="nama_instansi" class="form-control text-center fw-bold" value="<%= datahasilquery[0].nama_instansi %>" required></strong></li>
+                        <li><input type="text" name ="alamat" class="form-control text-center" value="<%= datahasilquery[0].alamat %>" required></li>
+                        <li><input type="text" name ="teruntuk" class="form-control text-center" value="<%= datahasilquery[0].teruntuk %>" required></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-5">
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label fw-bold">No :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" value="MTT_<%=datahasilquery[0].no %>" readonly>
+                            <input type="hidden" name="no" value="<%= datahasilquery[0].no %>">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 align-items-center">
+                        <label class="col-sm-4 col-form-label">Date of Issuance</label>
+                        <div class="col-sm-8">
+                            <input type="date" name ="date_issuance" class="form-control" value="<%= datahasilquery[0].date_issuance %>" >
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 align-items-cente">
+                        <label class="col-sm-4 col-form-label">Due Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" name="due_date" class="form-control" value="<%= datahasilquery[0].due_date %>" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->        
+            <table class="table table-bordered align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:5%">No</th>
+                        <th>Description</th>
+                        <th style="width:20%">Ticket Number</th>
+                        <th style="width:20%">Harga</th>
+                        <th style="width:10%" class="no-print">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <% var no=1; %>
+                            <% datahasilquery.forEach(s =>{%>
+                                <tr>
+                                    <td style="display:none;">
+                                        <input type="hidden" name="id_in[]" value="<%- s.id_in %>">
+                                    </td>
+                                    <td><%- no++%></td>
+                                    <td>
+                                        <textarea name="description[]" class="form-control "><%- s.description %></textarea>
+                                    </td>
+                                    <td>
+                                        <input name="tic_number[]" type="text" class="form-control" value="<%- s.tic_number%>" required>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span class="input-group-text">IDR</span>
+                                            <input name="nominal[]" type="number" class="form-control harga" value="<%- s.nominal%>" required>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" 
+                                                class="btn btn-danger btn-delete no-print"  
+                                                > 
+                                                Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% });%>
+
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end fw-bold">
+                            Total IDR
+                        </td>
+                        <td>
+                            <input id="total" name="total" type="hidden">
+                            <input id="total_view" type="text" class="form-control" readonly>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+            <!-- Footer -->
+            <div class="row mt-4">
+                <div class="col-md-8 border-bottom">
+                    Terbilang :
+                    <span id="terbilangText" class="fw-bold"></span>
+                </div>
+                <div class="col-md-4 text-end">
+                    TTd
+                </div>
+            </div>
+
+            <!-- footer -->
+            <%- include('../templet/footerinvoice') %>
+            <!-- footer -->
+
+            <!-- Add Row Button -->
+            <div class="row mt-1 mb-2 d-flex justify-content-end">
+                <div class="col-2 text-end">
+                    <button type="button" id="btnAdd" class="btn btn-warning no-print">
+                        Add Row
+                    </button>
+                </div>
+
+                <div class="col-2 text-end">
+                    <input type="submit" id="print"  class="btn btn-warning no-print" value="Simpan & Cetak Resi">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.invoce.app
+productName: InvoiceApp
+win:
+  target: nsis
+files: []
+electronVersion: 41.1.1

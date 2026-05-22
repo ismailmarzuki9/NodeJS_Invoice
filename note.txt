@@ -1,0 +1,74 @@
+CREATE TABLE invoice (
+    id_in VARCHAR PRIMARY KEY,
+    no INTEGER,
+    description TEXT,
+    tic_number VARCHAR(50),
+    nominal NUMERIC(15,2),
+    total NUMERIC(15,2),
+    date_issuance VARCHAR(50),
+    Due_Date VARCHAR(50),
+    nama_instansi VARCHAR(25),
+    alamat VARCHAR(50),
+    teruntuk VARCHAR(20),
+    tggl_data_masuk TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tggl_data_terupdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+// try{
+//     for(let i=0; i < tic.number.length ; i++ )
+//     {
+//         const id = req.body.id_in[i]
+//         const description = req.body.description[i]
+//         const nominal = req.body.nominal[i]
+//         const id = req.body.id_in[i]
+//     }
+// }catch{
+
+// }
+
+==========
+static async editinvoicepost(req, res){
+        console.log("Data from edit", req.body);
+        try{
+             const {
+                        id_in,
+                        no,
+                        description,
+                        tic_number,
+                        nominal,
+                        total,
+                        date_issuance,
+                        due_date
+                    } = req.body; //Perlu di descripsikan
+
+            for (let i = 0; i < description.length; i++) {
+                console.log("data Ke",id_in[i]);
+                if (description[i].length=id_in[i].length) {
+                    console.log("Id_kosong");
+                }
+                await invoicemodel.update(id_in[i], {
+                    id_in : id_in[i],
+                    no : no,
+                    description : description[i],
+                    tic_number : tic_number[i],
+                    nominal : nominal[i],
+                    total,
+                    date_issuance,
+                    due_date
+                })
+            }
+
+            res.redirect('/print/'+no);
+
+        }catch (error){
+            console.error(error);
+            // kirim respon gagal
+            // return res.status(500).json("Gagal menyimpan data");
+        }
+    }
+==========
+
+
+==S=============
+ada issue di edit diaman ada data hapus yang tidak di proses dan data edit yang tidak tesimpan [sudah solve]
+==E=============

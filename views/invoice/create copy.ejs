@@ -1,0 +1,148 @@
+<div class="container mt-3">
+    <div  id="invoiceArea" class="border shadow p-4 bg-body-tertiary rounded">
+
+        <!-- Logo -->
+        <div class="text-center mb-3">
+            <img src="./img/logo2.png" class="img-fluid" style="max-width:150px;">
+        </div>
+
+        <!-- Title -->
+        <div class="text-center border border-3 border-dark mb-3">
+            <h2 class="fw-bold m-2">FAKTUR / INVOICE</h2>
+        </div>
+
+        <!-- Header Section -->
+        <form method="POST" action="/simpan" id="invoiceForm">
+            <div class="row border border-3 p-3 mb-3">
+
+                <div class="col-md-7 border p-3">
+                    <ul class="list-unstyled mb-0 text-center">
+                        <li><strong><input type="text" name ="nama_instansi" class="form-control text-center" placeholder="Nama instansi" required></strong></li>
+                        <li><input type="text" name ="alamat" class="form-control text-center" placeholder="alamat" required></li>
+
+                        <li><input type="text" name ="teruntuk" class="form-control text-center" placeholder="Nama penerima" required></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-5">
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label fw-bold">No :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" value="MTT_<%=noBaru %>" readonly>
+                            <input type="hidden" name="no" value="<%= noBaru %>">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 align-items-center">
+                        <label class="col-sm-4 col-form-label">Date of Issuance</label>
+                        <div class="col-sm-8">
+                            <input type="date" name ="date_issuance" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 align-items-cente">
+                        <label class="col-sm-4 col-form-label">Due Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" name="due_date" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->        
+            <table class="table table-bordered align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:5%">No</th>
+                        <th>Description</th>
+                        <th style="width:20%">Ticket Number</th>
+                        <th style="width:15%">Harga</th>
+                        <th style="width:10%" class="no-print">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <textarea name="description[]" class="form-control"></textarea>
+                        </td>
+                        <td>
+                            <input name="tic_number[]" type="text" class="form-control" required>
+                        </td>
+                        <td>
+                            <input name="nominal[]" type="number" class="form-control harga" required>
+                        </td>
+                         <td>
+                            <button type="button" class="btn btn-danger btn-delete no-print">Hapus</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end fw-bold">
+                            Total
+                        </td>
+                        <td>
+                            <input id="total" name="total" type="hidden">
+                            <input id="total_view" type="text" class="form-control" readonly>
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        
+            <!-- Footer -->
+            <div class="row mt-4">
+                <div class="col-md-8 border-bottom">
+                    Terbilang :
+                    <span id="terbilangText" class="fw-bold"></span>
+                </div>
+                <div class="col-md-4 text-end">
+                    TTd
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-6  py-0">
+                    <p class="text-decoration-underline mb-1">PLEASE TRANSFER "FULL AMOUNT" TO :</p>
+                    <p class="m-0">BANK CENTRAL ASIA (BCA)</p>
+                    <p class="m-0 ">REDO SYAFRIYAN</p>
+                    <p class="mb-1">604-082-679-1</p>
+                    <p class="m-0">BANK NEGARA INDONESIA (BNI)</p>
+                    <p class="m-0">REDO SYAFRIYAN</p>
+                    <p class="m-0">114-394-386-4</p>
+                </div>
+                <div class="col-6 text-center m-0 p-0">
+                    <p class="text-decoration-underline m-0">EX. RATE BASED ON THE DAY OF PAYMENT</p>
+                    <p class="m-0">KURS BERDASARKAN HARI PEMBAYARAN</p>
+                    <p class="text-decoration-underline m-0">TRANSFER CHARGES ARE FOR ACCOUNT REMITTER</p>
+                    <p class="m-0">BIAYA BANK DIBEBANKAN KEPADA PENGIRIM</p>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <h6 class="m-0">MINANG</h6>
+                <p class="m-0 font-size-h8 ">T O U R S & T R A V E L</p>
+                <p class="mb-0 pb-0 font-size-h8 ">JL Pakembangan/Inspeksi Grogol Blok D2 no 58 Kemanggisan Palmerah 11480</p>
+                <p class="m-0">TEL : 085835303536</p>
+                <p class="m-0">E-MAIL : redho1993@gmail.com</p>
+            </div>
+
+            <!-- Add Row Button -->
+            <div class="row mt-1 mb-2 d-flex justify-content-end">
+                <div class="col-2 text-end">
+                    <button type="button" id="btnAdd" class="btn btn-warning no-print">
+                        Add Row
+                    </button>
+                </div>
+
+                <div class="col-2 text-end">
+                    <input type="submit" id="print"  class="btn btn-warning no-print" value="Simpan & Cetak Resi">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

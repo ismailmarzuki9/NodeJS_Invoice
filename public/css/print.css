@@ -1,0 +1,29 @@
+@media print {
+    body * {
+        visibility : hidden;
+    }
+
+    #invoiceArea, #invoiceArea *{
+        visibility : visible;
+    }
+
+    #invoiceArea {
+        position : absolute;
+        left :0;
+        top :0;
+        width :100%;
+    }
+    .no-print{
+        display : none !important;
+    }
+
+    textarea,
+    input {
+        border: none;
+        outline: none;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+}

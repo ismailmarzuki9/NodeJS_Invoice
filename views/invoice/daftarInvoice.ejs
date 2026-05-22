@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .custom-table {
+            table-layout: auto;
+            width: 100%;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            white-space: nowrap; /* biar tidak turun baris */
+        }
+
+        .custom-table td:nth-child(4) {
+            text-align: end; /* kolom total rata kanan */
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="table-container">
+
+            <h5 class="mb-3 fw-bold">Invoice List</h5>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle custom-table">
+                    <thead class="text-center">
+                        <tr>
+                            <th>No</th>
+                            <th>No MTT</th>
+                            <th>TIC Number</th>
+                            <th>Total</th>
+                            <th>Date Issuance</th>
+                            <th>Due Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let No = 1 %>
+                        <% data.forEach(s => { %>                       
+                            <tr class="text-center">
+                                <td><%= No++ %></td>
+                                <td><%= 'MTT_' + s.no %></td>
+                                <td><%= s.tic_number %></td>
+                                <td><%= s.total %></td>
+                                <td><%= s.date_issuance || '-' %></td>
+                                <td><%= s.due_date || '-' %></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <a href="/invoice/<%= s.no %>/edit" class="btn btn-sm btn-warning">Edit</a>
+
+                                        <form action="/delete/invoice/<%= s.no %>" method="POST">
+                                            <button class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Yakin data akan dihapus?')"
+                                                    >Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<div class="container row mt-2">
+    <div class="d-flex justify-content-end">
+        <button type="button" id="btnAdd" class="btn btn-warning">Add Row</button>
+        <!-- <button type="button" class="btn btn-warning">Warning</button> Tombol tambahan -->
+    </div>
+</div>
+
+<div class="container border mt-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+    <div class="text-center mb-3">
+        <img src="./img/logo2.png" class="img-fluid" style="width:100px">
+    </div>
+<!-- Faktur -->
+    <div class="row border border-5 border-black">
+        <h1>FAKTUR / INVOICE </h1>
+    </div>
+<!-- Faktur -->
+
+    <div class="row border border-5">
+        <div class="col-7 border m-3 p-1">
+            <ul class="m-0 p-2 list-unstyled text-center">
+                <li><h5 class="mb-1 p-0">BPK RI</h5></li>
+                <li><h5 class="mb-1 p-0">JL. Gatot Subroto Kav 31</h5></li>
+                <li><h5 class="mb-1 p-0">JAKARTA PUSAT</h5></li>
+                <li><h5 class="mb-0 p-0">co : Ms Ocha</h5></li>
+            </ul>
+        </div>
+        <div class="col-4 m-3">
+            <ul class="m-0 p-0 list-unstyled text-start">
+                <li><h5 class="mb-1 p-0">NO :</h5></li>
+                <li><h5 class="mb-1 p-0">Dikeluarkan/Date of Inssuance</h5></li>
+                <div class="div">
+                    <input type="date" class="form-control border border-5">
+                </div>
+                <li><h5 class="mb-1 p-0">Jatuh tempo/Due date</h5></li>
+                <div class="div">
+                    <input type="date" class="form-control border border-5">
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabels -->
+    <table class="table table-bordered mt-3 custom-table">
+        <thead>
+            <tr>
+                <th scope="col">NO</th>
+                <th scope="col" >Description</th>
+                <th scope="col" >Ticket Number</th>
+                <th scope="col" >Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form method="POST" action="/users">
+                <tr id="addRow">
+                    <th scope="row">1</th>
+                    <td>
+                        <textarea name="textarea" class="form-control" placeholder="Nama"></textarea>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control">
+                    </td>
+                </tr>
+                
+                <tr>
+                <td colspan="3" class="text-end">Total </td>
+                <td>____</td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+    <!-- tabels -->
+
+    <div class="row">
+        <div class="col-8 border-bottom">Terbilang : </div>
+        <div class="col-4">TTd</div>
+    </div>
+<!-- row5 -->
+    <div class="row mt-2">
+        <div class="col-6 py-0">
+            <p class="text-decoration-underline">PLEASE TRANSFER "FULL AMOUNT" TO :</p>
+            <p class="m-0">BANK CENTRAL ASIA (BCA)</p>
+            <p class="m-0 ">REDO SYAFRIYAN</p>
+            <p class="m-0">604-082-679-1</p>
+        </div>
+        <div class="col-6 text-center m-0 p-0">
+            <p class="text-decoration-underline m-0">EX. RATE BASED ON THE DAY OF PAYMENT</p>
+            <p class="m-0">KURS BERDASARKAN HARI PEMBAYARAN</p>
+            <p class="text-decoration-underline m-0">TRANSFER CHARGES ARE FOR ACCOUNT REMITTER</p>
+            <p class="m-0">BIAYA BANK DIBEBANKAN KEPADA PENGIRIM</p>
+        </div>
+    </div>
+<!-- row5 -->
+    <div class="row text-center">
+        <h6 class="m-0">MINANG</h6>
+        <h5 class="m-0">T O U R S & T R A V E L</h5>
+        <p class="m-0">JL Pakembangan/Inspeksi Grogol Blok D2 no 58 Kemanggisan Palmerah 11480</p>
+        <p class="m-0">TEL : 085835303536</p>
+        <p class="m-0">E-MAIL ; redho1993@gmail.com</p>
+    </div>
+</div>
+<!-- <script>
+let rowCount = 1;
+
+document.getElementById("btnAdd").addEventListener("click", function() {
+
+    rowCount++;
+
+    const tableBody = document.getElementById("tableBody");
+
+    const newRow = document.createElement("tr");
+
+    newRow.innerHTML = `
+        <td>${rowCount}</td>
+        <td><textarea class="form-control"></textarea></td>
+        <td><input type="text" class="form-control"></td>
+        <td><input type="text" class="form-control"></td>
+    `;
+
+    tableBody.appendChild(newRow);
+});
+</script> -->
