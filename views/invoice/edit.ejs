@@ -63,9 +63,9 @@
                     <% var no=1; %>
                             <% datahasilquery.forEach(s =>{%>
                                 <tr>
-                                    <td style="display:none;">
+                                    <!-- <td style="display:none;"> -->
                                         <input type="hidden" name="id_in[]" value="<%- s.id_in %>">
-                                    </td>
+                                    <!-- </td> -->
                                     <td><%- no++%></td>
                                     <td>
                                         <textarea name="description[]" class="form-control "><%- s.description %></textarea>

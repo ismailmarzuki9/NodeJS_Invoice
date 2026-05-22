@@ -47,7 +47,7 @@ document.getElementById("tableBody").addEventListener("click", function(e) {
         const rows = document.querySelectorAll("#tableBody tr");
 
         rows.forEach((row, index) => {
-            row.querySelectorAll("td")[1].textContent = index + 1;
+            row.querySelectorAll("td")[0].textContent = index + 1;
         });
 
         rowCount = rows.length;

@@ -35,7 +35,7 @@ class InvoiceController {
             // simpan ke database di sini
             for (let i =0; i < description.length; i++){
                 await invoicemodel.create({
-                    ID_in : Date.now() + i,
+                    id_in : Date.now() + i,
                     no,
                     description : description[i],
                     tic_number : tic_number[i],
@@ -101,7 +101,7 @@ class InvoiceController {
             
             // get data id_in dari Db berdasrkan no yang di kirim
             const noFromDb = await invoicemodel.getid_infromdb(no);
-            console.log("data hasil q", noFromDb);
+            // console.log("data hasil q", noFromDb);
             const ubfdb= noFromDb.map(item => item.id_in); // <-- rubah ke bentuk array
             console.log("hasil perubahan ke arry data dari db", ubfdb);
 
@@ -110,7 +110,7 @@ class InvoiceController {
             console.log("data dari edit.ejs", noFromEdit);
 
             const idsToDelete = ubfdb.filter(
-                iddelete => !noFromEdit.includes(id)
+                iddelete => !noFromEdit.includes(iddelete)
             );
             console.log("ini data yg terhapus",idsToDelete);
 
