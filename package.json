@@ -2,8 +2,17 @@
   "name": "invoce_n",
   "version": "1.0.0",
   "description": "package",
+  "keywords": [],
+  "homepage": "https://github.com/ismailmarzuki9/NodeJS_Invoice#readme",
+  "bugs": {
+    "url": "https://github.com/ismailmarzuki9/NodeJS_Invoice/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismailmarzuki9/NodeJS_Invoice.git"
+  },
   "license": "ISC",
-  "author": "",
+  "author": "pckantor",
   "type": "commonjs",
   "main": "main.js",
   "scripts": {
@@ -27,12 +36,11 @@
     "electron-builder": "^26.8.1",
     "wait-on": "^9.0.4"
   },
-  "keywords": [],
   "build": {
-  "appId": "com.invoce.app",
-  "productName": "InvoiceApp",
-  "win": {
-            "target": "nsis"
-          }
+    "appId": "com.invoce.app",
+    "productName": "InvoiceApp",
+    "win": {
+      "target": "nsis"
+    }
   }
 }
