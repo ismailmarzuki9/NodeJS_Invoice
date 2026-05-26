@@ -3,6 +3,7 @@ const router = express.Router();
 
 const invoiceController = require('../controllers/InvoiceController');
 
+// invoice router 
 router.get('/', invoiceController.create);
 router.post('/simpan', invoiceController.post);
 router.get('/print/:no', invoiceController.print);
@@ -15,5 +16,9 @@ router.post('/delete/invoice/:no', invoiceController.delete);
 //     console.log("ROUTE TEST");
 //     res.send("OK");
 // });
+
+// Authentication 
+router.get('/',)
+
 
 module.exports = router;
