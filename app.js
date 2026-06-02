@@ -24,8 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // start server
-// app.listen(4000,() => {
-//   console.log('Server running on http://localhost:4000');
-// });
+app.listen(4000,() => {
+  console.log('Server running on http://localhost:4000');
+});
 // 🔥 export saja (JANGAN listen)
 module.exports = app;
