@@ -38,27 +38,35 @@ class Auth {
         res.render('author/login')
     }
     static async loginPost(req, res){
-        const data = ValidationResult(req);
-
-        if (!data.isEmpty) {
-            return res.render('author/login',{
-                errors :errors.arryay()
-            });
+        try {
+            const {email, password} = req.body
+            const cekEmail = await AuthModel.findEmail(email);
+            console.log('cekemail',cekEmail);
+            if(cekEmail.length === 0){
+                console.log("Email tidak di temukan")
+                return res.render('author/login') // return berfungsi agar code di bawahnya tidak di exsekusi
+            }else
+            if (cekEmail.length > 0) {
+                // cek password
+                const getArry0 =cekEmail[0];
+                console.log('ambil arry ke 0', getArry0);
+                console.log("cek password");
+                const validPassword = await bcrypt.compare(
+                    password, // password dari from logn
+                    getArry0.password_hash // password dari query di model
+                );
+                console.log('cek valipass', validPassword);
+                if(!validPassword){
+                    console.log('Password salah');
+                    return res.redirect('/login'); // reirect mengembalikakan ke URL sedangkan render langsung ke views dalam hal ini pada directory author/login
+                } 
+                res.redirect('/');
+            }
+            
+        } catch (error) {
+            console.log(error);
+            res.send(error.message);            
         }
-
-        const token = await AuthService.login(
-            req.body.email,
-            req.body.password
-        )
-
-        if (!token){
-            return res.render('auth/login', {
-                errors: [{ msg: 'Email atau password salah' }]
-            });
-        }
-        
-        res.cookie('token', token, { httpOnly: true });
-        res.redirect('/');
     }
 }
 

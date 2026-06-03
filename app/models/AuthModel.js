@@ -13,5 +13,12 @@ class AuthModel {
         return result.rows;
     }
 
+    static async findEmail(data){
+        console.log(data);
+        const sql = 'Select * FROM users WHERE email =$1';
+        const result = await db.query(sql,[data]);
+        return result.rows;
+    }
+
 }
 module.exports = AuthModel;
