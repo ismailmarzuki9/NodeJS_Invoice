@@ -14,14 +14,25 @@ CREATE TABLE invoice (
     tggl_data_terupdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE users (
-    id  SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    email VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    is_active BOOLEAN NOT NULL DEFAULT FALSE,
+    email_verified BOOLEAN NOT NULL DEFAULT FALSE,
+
+    failed_login_attempts INTEGER NOT NULL DEFAULT 0,
+    locked_until TIMESTAMPTZ NULL,
+
+    last_login_at TIMESTAMPTZ NULL,
+
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-
+npm install express mysql2 sequelize jsonwebtoken dotenv cookie-parser cors
 // try{
 //     for(let i=0; i < tic.number.length ; i++ )
 //     {
