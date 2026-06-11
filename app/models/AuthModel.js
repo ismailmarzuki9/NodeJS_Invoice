@@ -4,10 +4,10 @@ class AuthModel {
 
     static async create (data){
          console.log('data di model',data);
-        const sql = 'INSERT INTO users (username, email, password_hash) VALUES ($1,$2, $3)';
-        const reslut = await db.query(sql,[
-            data.username,
+        const sql = 'INSERT INTO users (email, username, password_hash) VALUES ($1,$2, $3)';
+        const result = await db.query(sql,[
             data.email,
+            data.username,
             data.password_hash
         ])
         return result.rows;
