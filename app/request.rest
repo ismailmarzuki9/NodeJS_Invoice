@@ -1,0 +1,12 @@
+// untuk melakukan pengujian
+GET  http://localhost:4000/login
+
+
+
+POST  http://localhost:4000/login
+Content-Type: application/json
+{
+    "email" : "Admin@gmail.com",
+    "password_hash" :"admin123"
+} !! INI TIDAK BERFUNGSI JIKA MAU INSTAL EXTENSION NYA DI VISUALSTUIOCODE 
+SEKARANG KITA GUNNAKAN POSTMAN SAJA

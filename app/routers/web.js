@@ -16,7 +16,7 @@ router.post('/delete/invoice/:no', invoiceController.delete);
 
 // Authentication 
 router.get('/auth/register', authController.create_view);
-router.post('/postregister', authController.post);
+router.post('/postregister', authController.postregister);
 router.get('/login', authController.loginView);
 router.post('/login', authController.loginPost);
 // router.post('/postregister', (req, res) => {

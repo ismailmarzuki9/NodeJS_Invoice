@@ -14,7 +14,7 @@ CREATE TABLE invoice (
     tggl_data_terupdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE users (
-    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    userid INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 
     email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(100) NOT NULL UNIQUE,
@@ -31,6 +31,7 @@ CREATE TABLE users (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+=========================================T A B E L ===============================
 
 npm install express mysql2 sequelize jsonwebtoken dotenv cookie-parser cors
 // try{
@@ -89,6 +90,6 @@ static async editinvoicepost(req, res){
 
 
 ==S=============
-ada issue di edit diaman ada data hapus yang tidak di proses dan data edit yang tidak tesimpan [sudah solve]
-update 1 11062026
+update 2 16062026
+next authentication login
 ==E=============

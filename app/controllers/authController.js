@@ -1,6 +1,7 @@
 const { Result } = require ('pg');  
 const AuthModel  = require('../models/AuthModel');
 const bcrypt = require('bcrypt'); // menggunakan hash bacrypt code orang lain yg di ambil dari node js
+const jwt = require('jsonwebtoken');
 
 class Auth {
 
@@ -8,7 +9,7 @@ class Auth {
         res.render('author/reqister');
     }
 
-    static async post (req, res){
+    static async postregister (req, res){
         console.log(req.body);
         try {
             const {
@@ -27,7 +28,7 @@ class Auth {
                 password_hash
             });
 
-            res.render('/daftarInvoice');
+            res.render('/invoice/daftarInvoice');
 
         } catch (error) {
             
@@ -39,6 +40,8 @@ class Auth {
     }
     static async loginPost(req, res){
         try {
+            console.log("Body:", req.body);
+            console.log("Headers:", req.headers);
             const {email, password} = req.body
             const cekEmail = await AuthModel.findEmail(email);
             console.log('cekemail',cekEmail);
@@ -59,7 +62,40 @@ class Auth {
                 if(!validPassword){
                     console.log('Password salah');
                     return res.redirect('/login'); // reirect mengembalikakan ke URL sedangkan render langsung ke views dalam hal ini pada directory author/login
-                } 
+                }
+
+                // JWT mengakses token dari file env
+                const accessToken = jwt.sign({ email:email }, process.env.ACCESS_TOKEN_SECRET,
+                    {
+                    expiresIn: '20s'
+                    }
+                );
+
+                const refreshToken = jwt.sign({ email:email }, process.env.REFRESH_TOKEN_SECRET,
+                    {
+                    expiresIn: '1d'
+                    }
+                );
+
+                await AuthModel.update({refresh_token: refreshToken},{
+                    where :{
+                        id:userid // melakukan updateberdasarkan userid pada model AuthModel
+                    }
+                });
+
+                // http only cookie
+                res.cookie('refreshToken', refreshToken, {
+                    httpOnly : true,
+                    maxAge : 24 * 60 * 60 * 1000,
+                    secure : true
+                });
+
+                res.json({ accessToken});
+                console.log(res.json({accessToken}));
+
+                // update tabel user is active
+                const isActive = await AuthModel.isactive(email);
+
                 res.redirect('/');
             }
             

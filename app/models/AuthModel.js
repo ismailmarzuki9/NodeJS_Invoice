@@ -13,9 +13,15 @@ class AuthModel {
         return result.rows;
     }
 
-    static async findEmail(data){
-        console.log(data);
+    static async findEmail(email){
+        console.log(email);
         const sql = 'Select * FROM users WHERE email =$1';
+        const result = await db.query(sql,[email]);
+        return result.rows;
+    }
+
+    static async isactive (data){
+        const sql ='UPDATE users SET is_active = TRUE WHERE email = $1';
         const result = await db.query(sql,[data]);
         return result.rows;
     }
