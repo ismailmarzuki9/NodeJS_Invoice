@@ -6,10 +6,10 @@ const db = require('../../config/database.js');
 
 const { DataTypes } = Sequelize;
 
-const UsersTes = db.define(
-    "UsersTes",
+const users = db.define(
+    "users",
     {
-        id: {
+        userid: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -30,6 +30,11 @@ const UsersTes = db.define(
         password_hash: {
             type: DataTypes.STRING(255),
             allowNull: false
+        },
+
+        refresh_token: {
+            type: DataTypes.TEXT,
+            allowNull: true
         },
 
         is_active: {
@@ -79,4 +84,4 @@ const UsersTes = db.define(
 );
 
 // export default usertTes cara penulisan expoert module ES
-module.exports = UsersTes
+module.exports = users

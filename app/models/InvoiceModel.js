@@ -30,12 +30,20 @@ class InvoiceModel {
     }
 
     static async getLatest(){
-        const result = await db.query(
+        // biasa
+        // const result = await db.query(
+        //     'SELECT no FROM invoice ORDER BY tggl_data_masuk DESC LIMIT 1'
+        // );
+        // console.log("get_id",result);
+        // return result.rows;
+
+        // Menggunkan sequelize
+        const [rows] = await db.query(
             'SELECT no FROM invoice ORDER BY tggl_data_masuk DESC LIMIT 1'
         );
 
-        // return result.rows[0];
-        return result.rows;
+        return rows[0];
+        
     }
 
     static async findByNo(no){

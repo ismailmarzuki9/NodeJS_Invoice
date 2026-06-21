@@ -25,10 +25,10 @@ require('dotenv').config();
     
 // }
 
-console.log(process.env.DB_TYPE);
-console.log(process.env.DB_HOST);
-console.log(process.env.DB_NAME);
-console.log("DATABASE.JS DIPANGGIL");
+// console.log(process.env.DB_TYPE);
+// console.log(process.env.DB_HOST);
+// console.log(process.env.DB_NAME);
+// console.log("DATABASE.JS DIPANGGIL");
 
 const db = new Sequelize(
     process.env.DB_NAME,

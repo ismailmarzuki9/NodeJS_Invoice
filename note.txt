@@ -90,6 +90,6 @@ static async editinvoicepost(req, res){
 
 
 ==S=============
-update 2 16062026
-next authentication login
+update 3 21062026
+next authentication baca chetgpt di user ciek passsam untuk update login tidak bisa multipe login dan keamana lainnya
 ==E=============

@@ -43,20 +43,20 @@ class Auth {
             console.log("Body:", req.body);
             console.log("Headers:", req.headers);
             const {email, password} = req.body
-            const cekEmail = await AuthModel.findEmail(email);
+            const cekEmail= await AuthModel.findEmail(email);
             console.log('cekemail',cekEmail);
-            if(cekEmail.length === 0){
+            if(!cekEmail){
                 console.log("Email tidak di temukan")
                 return res.render('author/login') // return berfungsi agar code di bawahnya tidak di exsekusi
             }else
-            if (cekEmail.length > 0) {
+            if (cekEmail) {
                 // cek password
-                const getArry0 =cekEmail[0];
-                console.log('ambil arry ke 0', getArry0);
+                const getPassword =cekEmail.password_hash;
+                console.log('ambil password', getPassword);
                 console.log("cek password");
                 const validPassword = await bcrypt.compare(
                     password, // password dari from logn
-                    getArry0.password_hash // password dari query di model
+                    getPassword // password dari query di model
                 );
                 console.log('cek valipass', validPassword);
                 if(!validPassword){
@@ -76,12 +76,8 @@ class Auth {
                     expiresIn: '1d'
                     }
                 );
-
-                await AuthModel.update({refresh_token: refreshToken},{
-                    where :{
-                        id:userid // melakukan updateberdasarkan userid pada model AuthModel
-                    }
-                });
+                const userid = cekEmail.userid;
+                await AuthModel.updateRefreshToken( userid, refreshToken );
 
                 // http only cookie
                 res.cookie('refreshToken', refreshToken, {
@@ -90,8 +86,8 @@ class Auth {
                     secure : true
                 });
 
-                res.json({ accessToken});
-                console.log(res.json({accessToken}));
+                // res.json({ accessToken});
+                console.log(accessToken);
 
                 // update tabel user is active
                 const isActive = await AuthModel.isactive(email);
