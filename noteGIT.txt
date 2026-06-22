@@ -1,0 +1,238 @@
+Mantap. Penyebabnya sudah jelas:
+
+Isi file:
+
+```bash
+cat ~/.git-credentials
+```
+
+menunjukkan:
+
+```text
+https://117197143:gho_xxxxxxxx@github.com
+```
+
+Itu **credential lama** (bahkan username bukan `ismailmarzuki9`), jadi Git selalu memakai itu untuk `push`, sehingga GitHub menolak.
+
+Setelah:
+
+```bash
+rm ~/.git-credentials
+```
+
+Git dipaksa meminta ulang username + token baru, dan akhirnya berhasil.
+
+---
+
+# Ringkasan troubleshooting GitHub “Invalid username or token”
+
+Kalau nanti error ini muncul lagi:
+
+```bash
+remote: Invalid username or token.
+fatal: Authentication failed
+```
+
+ikuti urutan ini.
+
+---
+
+# 1. Cek remote repository
+
+```bash
+git remote -v
+```
+
+Pastikan benar:
+
+```bash
+https://github.com/USERNAME/REPO.git
+```
+
+Kalau salah:
+
+```bash
+git remote set-url origin https://github.com/USERNAME/REPO.git
+```
+
+---
+
+# 2. Tes akses read
+
+Tes apakah token masih valid:
+
+```bash
+git ls-remote https://USERNAME@github.com/USERNAME/REPO.git
+```
+
+Kalau berhasil:
+
+✅ token valid
+✅ repo bisa diakses
+
+Kalau gagal:
+
+❌ token salah / expired / revoked
+
+---
+
+# 3. Cek credential helper
+
+Lihat metode penyimpanan credential:
+
+```bash
+git config --global credential.helper
+```
+
+atau lebih detail:
+
+```bash
+git config --list --show-origin
+```
+
+Contoh:
+
+```text
+credential.helper=store
+```
+
+Artinya token disimpan di:
+
+```bash
+~/.git-credentials
+```
+
+---
+
+# 4. Cek credential tersimpan
+
+```bash
+cat ~/.git-credentials
+```
+
+Contoh bermasalah:
+
+```text
+https://olduser:oldtoken@github.com
+```
+
+Kalau ada token lama → hapus.
+
+---
+
+# 5. Hapus credential lama
+
+Git Bash:
+
+```bash
+rm ~/.git-credentials
+```
+
+PowerShell:
+
+```powershell
+Remove-Item $HOME\.git-credentials
+```
+
+CMD:
+
+```cmd
+del %USERPROFILE%\.git-credentials
+```
+
+---
+
+# 6. Push ulang
+
+```bash
+git push origin branch-name
+```
+
+Masukkan:
+
+Username:
+
+```text
+username github
+```
+
+Password:
+
+```text
+Personal Access Token (PAT)
+```
+
+Bukan password akun GitHub.
+
+---
+
+# 7. Cek scope token
+
+Untuk PAT Classic minimal:
+
+```text
+repo
+```
+
+Untuk Fine-grained minimal:
+
+```text
+Contents → Read and Write
+```
+
+---
+
+# 8. Debug mode (jika masih gagal)
+
+```bash
+GIT_TRACE=1 GIT_CURL_VERBOSE=1 git push origin branch-name
+```
+
+Lihat:
+
+```text
+401 Unauthorized
+```
+
+→ token salah / credential lama
+
+```text
+403 Forbidden
+```
+
+→ token benar tapi tidak punya izin
+
+---
+
+# Inti masalah yang Anda alami
+
+Kasus Anda:
+
+```text
+credential.helperselector.selected=store
+```
+
+dan:
+
+```text
+~/.git-credentials
+```
+
+masih menyimpan:
+
+```text
+https://117197143:gho_oldtoken@github.com
+```
+
+Git terus memakai token lama.
+
+Solusi:
+
+```bash
+rm ~/.git-credentials
+git push origin fitur-login
+```
+
+Lalu login ulang dengan PAT baru.
+
+Itu akar masalahnya. Ini salah satu error GitHub yang paling sering terjadi saat memakai HTTPS + PAT.

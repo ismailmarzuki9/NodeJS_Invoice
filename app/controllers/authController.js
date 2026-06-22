@@ -28,7 +28,7 @@ class Auth {
                 password_hash
             });
 
-            res.render('/invoice/daftarInvoice');
+            res.render('invoice/daftarInvoice');
 
         } catch (error) {
             

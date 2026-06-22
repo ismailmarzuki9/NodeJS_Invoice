@@ -5,13 +5,16 @@ class AuthModel {
 
     static async create (data){
          console.log('data di model',data);
-        const sql = 'INSERT INTO users (email, username, password_hash) VALUES ($1,$2, $3)';
-        const result = await db.query(sql,[
-            data.email,
-            data.username,
-            data.password_hash
-        ])
-        return result.rows;
+        return await tb_user.create(data);
+        // const sql = 'INSERT INTO users (email, username, password_hash) VALUES ($1,$2, $3)';
+        // const result = await db.query(sql,[
+        //     data.email,
+        //     data.username,
+        //     data.password_hash
+        // ])
+        // return result.rows;
+
+        
     }
 
     // static async findEmail(email){
