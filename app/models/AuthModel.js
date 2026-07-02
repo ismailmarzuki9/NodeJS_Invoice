@@ -38,13 +38,13 @@ class AuthModel {
     }
 
     static async updateRefreshToken(userid, refreshToken) {
-        return await tb_user.update(
-            { refresh_token: refreshToken },
-            {
-                where: { userid }
-            }
-        );
-}
+            return await tb_user.update(
+                { refresh_token: refreshToken },
+                {
+                    where: { userid }
+                }
+            );
+    }
 
     // static async isactive (data){
     //     const sql ='UPDATE users SET is_active = TRUE WHERE email = $1';
@@ -56,8 +56,21 @@ class AuthModel {
         console.log(email)
         return await tb_user.update(
             { is_active : true },
-            { where : {email}} // karena variabel yang digunkan sama maka dari {email: email} bisa jadi {email}
+            { where : {email}} // karena variabel yang digunakan sama maka dari {email: email} bisa jadi {email}
         );
+    }
+
+    static async updateRefreshToken(userid, refreshToken) {
+        return await tb_user.update(
+            {   
+                refreshToken: null,
+                is_active : false
+            },
+            { 
+                where : {userid}
+            }
+        );
+
     }
 
 }

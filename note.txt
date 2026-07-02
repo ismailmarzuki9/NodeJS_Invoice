@@ -90,6 +90,17 @@ static async editinvoicepost(req, res){
 
 
 ==S=============
-update 3 21062026
+update 4 22 062026
 next authentication baca chetgpt di user ciek passsam untuk update login tidak bisa multipe login dan keamana lainnya
+Authentication Middleware Node.js
+Authorization Middleware (Role)
+Logout JWT
+Single Device Login
+Rate Limiting Login
+Account Lockout (failed_login_attempts)
+Email Verification
+Password Reset
+RBAC (Role Based Access Control)
+
+
 ==E=============

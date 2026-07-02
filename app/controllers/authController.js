@@ -61,13 +61,20 @@ class Auth {
                 console.log('cek valipass', validPassword);
                 if(!validPassword){
                     console.log('Password salah');
-                    return res.redirect('/login'); // reirect mengembalikakan ke URL sedangkan render langsung ke views dalam hal ini pada directory author/login
+                    return res.redirect('/login'); // redirect mengembalikakan ke URL sedangkan render langsung ke views dalam hal ini pada directory author/login
                 }
 
+                const payload = {
+                    userid: cekEmail.userid,
+                    email: cekEmail.email,
+                    role: cekEmail.role
+                };
                 // JWT mengakses token dari file env
-                const accessToken = jwt.sign({ email:email }, process.env.ACCESS_TOKEN_SECRET,
+                const accessToken = jwt.sign(
+                    payload, 
+                    process.env.ACCESS_TOKEN_SECRET,
                     {
-                    expiresIn: '20s'
+                    expiresIn: '20m'
                     }
                 );
 
@@ -80,10 +87,17 @@ class Auth {
                 await AuthModel.updateRefreshToken( userid, refreshToken );
 
                 // http only cookie
-                res.cookie('refreshToken', refreshToken, {
-                    httpOnly : true,
-                    maxAge : 24 * 60 * 60 * 1000,
-                    secure : true
+                // res.cookie('refreshToken', refreshToken, {
+                //     httpOnly : true,
+                //     maxAge : 24 * 60 * 60 * 1000,
+                //     secure : true
+                // });
+
+                res.cookie("accessToken", accessToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: "strict",
+                    maxAge: 15 * 60 * 1000
                 });
 
                 // res.json({ accessToken});
@@ -99,6 +113,30 @@ class Auth {
             console.log(error);
             res.send(error.message);            
         }
+    }
+
+    static async logout(req, res) {
+
+        const userid = req.user.userid;
+
+        await AuthModel.updateRefreshToken(userid, null);
+
+        // res.clearCookie("accessToken");
+        res.clearCookie("accessToken", {
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict"
+        });
+
+        // res.clearCookie("refreshToken");
+        res.clearCookie("refreshToken", {
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict"
+        });
+
+        res.redirect("/login");
+
     }
 }
 

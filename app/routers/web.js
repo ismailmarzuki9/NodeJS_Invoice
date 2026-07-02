@@ -4,11 +4,13 @@ const router = express.Router();
 const invoiceController = require('../controllers/InvoiceController');
 const authController = require('../controllers/authController');
 
+const authentication = require('../middlewares/authentication'); // ini untuk membatasi halama atau route mana saja yang hanya bisa di akases saat login
+
 // invoice router 
 router.get('/', invoiceController.create);
 router.post('/simpan', invoiceController.post);
 router.get('/print/:no', invoiceController.print);
-router.get('/daftarInvoice', invoiceController.daftarInvoice);
+router.get('/daftarInvoice', authentication, invoiceController.daftarInvoice);
 router.get('/invoice/:no/edit', invoiceController.editinvoice);
 router.post('/invoice/:no/edit', invoiceController.editinvoicepost);
 router.post('/delete/invoice/:no', invoiceController.delete);   
@@ -24,6 +26,7 @@ router.post('/login', authController.loginPost);
 //     console.log(req.body);
 //     res.send('OK');
 // });
+router.get('/logout', authentication, authController.logout);
 
 
 module.exports = router;
