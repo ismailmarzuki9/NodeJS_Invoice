@@ -11,22 +11,32 @@
     <link rel="stylesheet" href="/css/print.css">
     <link rel="stylesheet" href="/css/font.css">
     
-    <title>Hello, world!</title>
+    <title>Redo Invoice</title>
   </head>
   <body>
-    <div class="container-fluid mt-1">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
+    <!-- Navigation Button S -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Generated</a>
-          </li>
-          <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/daftarInvoice">Daftar Invoice</a>
-          </li>
-           <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
-          </li>
-        </ul>
-    </div>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/login" tabindex="-1" aria-disabled="true">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navigation Button E -->    
 
     <%- body %>
 
