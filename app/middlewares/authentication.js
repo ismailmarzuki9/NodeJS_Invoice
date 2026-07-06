@@ -6,9 +6,10 @@ function authentication(req, res, next) {
 
     if (!token) {
 
-        return res.status(401).json({
-            message: "Access Token tidak ditemukan"
-        });
+        // return res.status(401).json({
+        //     message: "Access Token tidak ditemukan"
+        // });
+        return res.redirect("/login");
 
     }
 

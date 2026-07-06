@@ -1,4 +1,4 @@
-const db = require('../../config/database');
+const db = require('../../config/database_con_Sequelize');
 const tb_user = require('../migrations/createTabelUsers');
 
 class AuthModel {

@@ -3,6 +3,7 @@ const path = require('path');
 const routes = require('./app/routers/web');
 const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
+const checkLogin = require('./app/middlewares/checkLogin');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser()); // untuk get cookie saat sudah login
+app.use(checkLogin);
 
 app.use('/', routes);
 

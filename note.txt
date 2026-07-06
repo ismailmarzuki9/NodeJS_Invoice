@@ -90,7 +90,7 @@ static async editinvoicepost(req, res){
 
 
 ==S=============
-update 4 22 062026
+update 5 22 06Juli26
 next authentication baca chetgpt di user ciek passsam untuk update login tidak bisa multipe login dan keamana lainnya
 Authentication Middleware Node.js
 Authorization Middleware (Role)
@@ -102,5 +102,10 @@ Email Verification
 Password Reset
 RBAC (Role Based Access Control)
 
+Note :
+ middleware 
+perbaikan tombol login dan logout yang melakukan pengecekan jika user sudah login maka tombol logout yang ada, begitu
+sebaliknya. dan penggunaan middleware untuk membatasi halaman yang boleh di akses oleh user ( authentication ) dan 
+middleware (checkLogin ) yang mengecek apakah sudah login atau belum berdasarakan accesstokent yang di ambil dari cookie
 
 ==E=============

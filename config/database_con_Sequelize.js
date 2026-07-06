@@ -30,7 +30,7 @@ require('dotenv').config();
 // console.log(process.env.DB_NAME);
 // console.log("DATABASE.JS DIPANGGIL");
 
-const db = new Sequelize(
+const dbseq = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
@@ -41,4 +41,4 @@ const db = new Sequelize(
     }
 );
 
-module.exports = db;
+module.exports = dbseq;

@@ -71,7 +71,7 @@ class InvoiceController {
 
     static async daftarInvoice(req, res){
         const data = await invoicemodel.finByNo_stbrs();
-        // console.log(data);
+       
         res.render('invoice/daftarInvoice', {data});
     }
 
