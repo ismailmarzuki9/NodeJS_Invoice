@@ -37,9 +37,11 @@ class AuthModel {
         });
     }
 
-    static async updateRefreshToken(userid, refreshToken) {
+    static async updateRefreshToken(userid, refreshToken, dateNow) {
             return await tb_user.update(
-                { refresh_token: refreshToken },
+                { refresh_token: refreshToken, 
+                  last_login_at : dateNow  
+                },
                 {
                     where: { userid }
                 }
@@ -60,7 +62,7 @@ class AuthModel {
         );
     }
 
-    static async updateRefreshToken(userid, refreshToken) {
+    static async updateRefreshTokenLogout(userid, refreshToken) {
         return await tb_user.update(
             {   
                 refreshToken: null,

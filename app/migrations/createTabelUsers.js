@@ -32,6 +32,11 @@ const users = db.define(
             allowNull: false
         },
 
+        role:{
+            type: DataTypes.STRING(20),
+            allowNull : false
+        },
+
         refresh_token: {
             type: DataTypes.TEXT,
             allowNull: true

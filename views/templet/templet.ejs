@@ -25,6 +25,17 @@
             <li class="nav-item">
               <a class="nav-link" href="/daftarInvoice">Daftar Invoice</a>
             </li>
+
+            <% if(user && user.role === "admin"){ %>
+            <li class="nav-item">
+              <a class="nav-link" href="/halamankususAdmin">tombol khusu admin</a>
+            </li>
+            <% }else if( user.role === "manager" ) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/halamankusus">tombol khusus manager</a>
+            </li>
+            <% } %>
+
           </ul>
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

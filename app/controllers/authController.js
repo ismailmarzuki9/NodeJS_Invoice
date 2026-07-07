@@ -15,6 +15,7 @@ class Auth {
             const {
                 username,
                 email,
+                role,
                 password
             } = req.body;
 
@@ -25,10 +26,11 @@ class Auth {
             await AuthModel.create({
                 username,
                 email,
+                role,
                 password_hash
             });
 
-            res.render('invoice/daftarInvoice');
+            res.redirect('/login');
 
         } catch (error) {
             
@@ -84,7 +86,9 @@ class Auth {
                     }
                 );
                 const userid = cekEmail.userid;
-                await AuthModel.updateRefreshToken( userid, refreshToken );
+                const dateNow = new Date().toISOString(); // untuk menampilkan ke view .toLocaleString('id-ID')
+                console.log("tanggal nya", dateNow);
+                await AuthModel.updateRefreshToken( userid, refreshToken, dateNow );
 
                 // http only cookie
                 // res.cookie('refreshToken', refreshToken, {
@@ -119,7 +123,7 @@ class Auth {
 
         const userid = req.user.userid;
 
-        await AuthModel.updateRefreshToken(userid, null);
+        await AuthModel.updateRefreshTokenLogout(userid, null);
 
         // res.clearCookie("accessToken");
         res.clearCookie("accessToken", {

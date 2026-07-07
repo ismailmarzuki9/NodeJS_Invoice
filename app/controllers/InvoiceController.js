@@ -12,8 +12,9 @@ class InvoiceController {
         if (rows.length > 0) {
             noBaru = rows[0].no + 1;
         }
-
-        res.render('invoice/create', { noBaru });
+        const role = null;
+        
+        res.render('invoice/create', { noBaru, role });
     }
 
     static async post(req, res){
