@@ -13,7 +13,28 @@ CREATE TABLE invoice (
     tggl_data_masuk TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tggl_data_terupdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE usersA (
+    userid INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 
+    email VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    refresh_token TEXT NULL DEFAULT NULL,
+    role VARCHAR(10) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT FALSE,
+    email_verified BOOLEAN NOT NULL DEFAULT FALSE,
+
+    failed_login_attempts INTEGER NOT NULL DEFAULT 0,
+    locked_until TIMESTAMPTZ NULL,
+
+    last_login_at TIMESTAMPTZ NULL,
+
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+=========================================T A B E L ===============================
+
+npm install express mysql2 sequelize jsonwebtoken dotenv cookie-parser cors
 // try{
 //     for(let i=0; i < tic.number.length ; i++ )
 //     {
@@ -70,5 +91,22 @@ static async editinvoicepost(req, res){
 
 
 ==S=============
-ada issue di edit diaman ada data hapus yang tidak di proses dan data edit yang tidak tesimpan [sudah solve]
+update 5 22 06Juli26
+next authentication baca chetgpt di user ciek passsam untuk update login tidak bisa multipe login dan keamana lainnya
+Authentication Middleware Node.js
+Authorization Middleware (Role)
+Logout JWT
+Single Device Login
+Rate Limiting Login
+Account Lockout (failed_login_attempts)
+Email Verification
+Password Reset
+RBAC (Role Based Access Control)
+
+Note :
+ middleware 
+perbaikan tombol login dan logout yang melakukan pengecekan jika user sudah login maka tombol logout yang ada, begitu
+sebaliknya. dan penggunaan middleware untuk membatasi halaman yang boleh di akses oleh user ( authentication ) dan 
+middleware (checkLogin ) yang mengecek apakah sudah login atau belum berdasarakan accesstokent yang di ambil dari cookie
+
 ==E=============
