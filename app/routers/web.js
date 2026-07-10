@@ -6,7 +6,8 @@ const authController = require('../controllers/authController');
 const middleware_halamankusus = require('../controllers/middleware_halamankusus');
 
 
-const authentication = require('../middlewares/authentication'); // ini untuk membatasi halama atau route mana saja yang hanya bisa di akases saat login
+const authentication = require('../middlewares/authentication'); // ini untuk authentikasi saat login, apakah user yang telah login benar2 login dengan cek token yang di bawanya
+const authorize = require('../middlewares/authorize'); // ini untuk membatasi halama atau route mana saja yang hanya bisa di akases saat login dengan role tertentu.
 const middle_user_akses = require('../middlewares/middle_admin');
 
 // invoice router 
@@ -35,6 +36,19 @@ router.get('/logout', authentication, authController.logout);
     // karena role user bisa banyak seperi admin, manager, staff, audit dan lain maka kita tidak bisa terus membuat file middleware berdasrak role user
     // maka kita gunakan authorize
 // router.get('/halamankususAdmin', authentication, middle_user_akses, middleware_halamankusus.getview);
+
+// router.get(
+//     "/laporan",
+//     authentication,
+//     authorize("admin", "manager"),
+//     laporanController.index
+// );
+
+router.get("halamanAdminManager", 
+            authentication,
+            authorize("admin", "manager"),
+        middleware_halamankusus.getview
+    );
 
 
 module.exports = router;

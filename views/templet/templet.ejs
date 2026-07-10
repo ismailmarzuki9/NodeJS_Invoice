@@ -23,16 +23,16 @@
               <a class="nav-link active" aria-current="page" href="/">Generated</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/daftarInvoice">Daftar Invoice</a>
+              <a class="nav-link" href="/daftarInvoice">Daftar Invoice <%= user %></a>
             </li>
 
             <% if(user && user.role === "admin"){ %>
             <li class="nav-item">
-              <a class="nav-link" href="/halamankususAdmin">tombol khusu admin</a>
+              <a class="nav-link" href="/halamankususAdmin">tombol khusu admin <%= user %></a>
             </li>
-            <% }else if( user.role === "manager" ) { %>
+            <% }else if(user && user.role === "manager" ) { %>
             <li class="nav-item">
-              <a class="nav-link" href="/halamankusus">tombol khusus manager</a>
+              <a class="nav-link" href="/halamankusus">tombol khusus manager </a>
             </li>
             <% } %>
 
