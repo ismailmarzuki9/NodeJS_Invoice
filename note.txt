@@ -107,6 +107,7 @@ Note :
  middleware 
 perbaikan tombol login dan logout yang melakukan pengecekan jika user sudah login maka tombol logout yang ada, begitu
 sebaliknya. dan penggunaan middleware untuk membatasi halaman yang boleh di akses oleh user ( authentication ) dan 
-middleware (checkLogin ) yang mengecek apakah sudah login atau belum berdasarakan accesstokent yang di ambil dari cookie
-
+middleware ( checkLogin ) yang mengecek apakah sudah login atau belum berdasarakan accesstokent yang di ambil dari cookie
+ perbaikan dari kode bg redo, kolom yang jatuh, perkecil logo dan perkecil footer bawah
+ 
 ==E=============
