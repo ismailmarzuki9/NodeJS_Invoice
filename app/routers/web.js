@@ -44,7 +44,7 @@ router.get('/logout', authentication, authController.logout);
 //     laporanController.index
 // );
 
-router.get("halamanAdminManager", 
+router.get("/halamankususAdmin", 
             authentication,
             authorize("admin", "manager"),
         middleware_halamankusus.getview
